@@ -9,4 +9,4 @@ the static web application is located at https://webserverlb-1229222875.us-east-
 
 The terraform file included named main.tf is what I used to build the EC2 server and its web app/static page.
 
-My web monitoring tool which I also built in python and is the file webmonitor.py It basically just reads the website and then converts the input into a hash, then rereads the website and stores that in a new hash and then compares both hashes. If they match it just continuues to repeat. If they do not match it outputs an alert via the print statement.
+My web monitoring tool which I also built in python and is the file webmonitor.py It basically just reads the website and then converts the input into a hash, then rereads the website and stores that in a new hash and then compares both hashes. If they match it just continues to repeat. If they do not match it outputs an alert via the print statement.
