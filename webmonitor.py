@@ -1,19 +1,25 @@
 import time
 import hashlib
-from urllib.request import urlopen, Request
 import ssl
+from urllib.request import urlopen, Request
+
  
 # website to monitor
-url = Request('http://34.226.88.255/',
-              headers={'User-Agent': 'Mozilla/5.0'})
 
+
+url = Request('https://webserverlb-1229222875.us-east-1.elb.amazonaws.com/',
+              headers={'User-Agent': 'Mozilla/5.0'})
+            
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
-content = urlopen(url, context=ctx).read()
+
+
+
+
  
 #read website and store it in webcontent
-webcontent = urlopen(url).read()
+webcontent = urlopen(url, context=ctx).read()
  
 #create the initial hash
 currentHash = hashlib.sha224(webcontent).hexdigest()
@@ -25,7 +31,7 @@ time.sleep(10)
 while True:
     try:
         #read website and store it in webcontent
-        webcontent = urlopen(url).read()
+        webcontent = urlopen(url, context=ctx).read()
          
         # create a hash
         currentHash = hashlib.sha224(webcontent).hexdigest()
@@ -34,7 +40,7 @@ while True:
         time.sleep(30)
          
         # perform the get request
-        webcontent = urlopen(url).read()
+        webcontent = urlopen(url, context=ctx).read()
          
         # create a new hash
         newHash = hashlib.sha224(webcontent).hexdigest()
@@ -49,7 +55,7 @@ while True:
             print("something changed")
  
             #read website again
-            webcontent = urlopen(url).read()
+            webcontent = urlopen(url, context=ctx).read()
  
             # create a hash
             currentHash = hashlib.sha224(webcontent).hexdigest()
